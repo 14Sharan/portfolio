@@ -1,0 +1,176 @@
+{% extends 'includes/header_footer.html' %}
+{% load static %}
+{% block content %}
+
+        <!-- Cart Page Start -->
+        <main class="contact_area inner-page-sec-padding-bottom">
+            <div class="container">
+                <div class="row mt--60 ">
+                    <div class="col-lg-5 col-md-5 col-12">
+                        <div class="checkout-cart-total">
+                            <h2 class="checkout-title">YOUR ORDER</h2>
+                            <h4>Product <span>Total</span></h4>
+                            <ul>
+                                {%for data in cart_data %}
+                                    <li><span class="left">{{ data.item.name }}</span> 
+                                        <span class="right">${{ data.total_price }}</span>
+                                    </li>
+                                {% endfor %}
+                            </ul>
+                            <p>Sub Total <span>${{ total_product_price }}</span></p>
+                            <p>Shipping Fee <span>$00.00</span></p>
+                            <h4>Grand Total <span>${{ total_product_price }}</span></h4>
+                        </div>
+                    </div>
+                    <div class="col-lg-7 col-md-7 col-12 mt--30 mt-md--0">
+                        <div class="contact_form">
+                            <h4 class="checkout-title">Billing Address</h4>
+                            <form id="checkout-form" action="{% url 'checkout' %}" method="post" class="contact-form">
+                                {% csrf_token %}
+                                
+                                <div class="row">
+                                    <div class="col-lg-6">
+                                        <div class="form-group">
+                                            <label>First Name <span class="required">*</span></label>
+                                            <input type="text" id="first_name" name="first_name" class="form-control validateInput"
+                                                required>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="form-group">
+                                            <label>Last Name <span class="required">*</span></label>
+                                            <input type="text" id="last_name" name="last_name" class="form-control validateInput"
+                                                required>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="form-group">
+                                            <label>Phone Number*</label>
+                                            <input type="text" id="phone_number" name="phone_number" class="form-control validateInput">
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="form-group">
+                                            <label>Company*</label>
+                                            <input type="text" id="company_name" name="company_name" class="form-control validateInput">
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="form-group">
+                                            <label>Country*</label>
+                                            <select class="form-control validateInput" name="country">
+                                                <option value="">Select Country</option>
+                                                <option value="bangladesh">Bangladesh</option>
+                                                <option value="china">China</option>
+                                                <option value="india">India</option>
+                                                <option value="japan">Japan</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="form-group">
+                                            <label>Email*</label>
+                                            <input type="email" id="email" name="email" class="form-control validateInput">
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="form-group">
+                                            <label>Town/City* </label>
+                                            <input type="text" id="town_city" name="town_city" class="form-control validateInput">
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="form-group">
+                                            <label>State* </label>
+                                            <input type="text" id="state" name="state" class="form-control validateInput">
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="form-group">
+                                            <label>Address Line-1* </label>
+                                            <input type="text" id="address_line1" name="address_line1" class="form-control validateInput">
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="form-group">
+                                            <label>Address Line-2* </label>
+                                            <input type="text" id="address_line2" name="address_line2" class="form-control validateInput">
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-12">
+                                        <div class="form-group">
+                                            <label>Zip Code* </label>
+                                            <input type="text" id="zip_code" name="zip_code" class="form-control validateInput">
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-12">
+                                        <div class="form-group">
+                                            <label>Notes*</label>
+                                            <textarea id="con_message" name="notes"
+                                                class="form-control validateInput"></textarea>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="form-btn">
+                                            <button type="button" value="submit" id="checkout_payment_btn" class="btn btn-black checkout_payment_btn"
+                                                name="submit">Place Order</button>
+                                        </div>
+                                        <div class="form__output"></div>
+                                    </div>
+                                </div>
+                            </form>
+                            <div class="form-output">
+                                <p class="form-messege"></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+        <!-- Cart Page End -->
+    </div>
+    <!--=================================
+  Brands Slider
+===================================== -->
+    <section class="section-margin">
+        <h2 class="sr-only">Brand Slider</h2>
+        <div class="container">
+            <div class="brand-slider sb-slick-slider border-top border-bottom" data-slick-setting='{
+                                            "autoplay": true,
+                                            "autoplaySpeed": 8000,
+                                            "slidesToShow": 6
+                                            }' data-slick-responsive='[
+                {"breakpoint":992, "settings": {"slidesToShow": 4} },
+                {"breakpoint":768, "settings": {"slidesToShow": 3} },
+                {"breakpoint":575, "settings": {"slidesToShow": 3} },
+                {"breakpoint":480, "settings": {"slidesToShow": 2} },
+                {"breakpoint":320, "settings": {"slidesToShow": 1} }
+            ]'>
+                <div class="single-slide">
+                    <img src="{% static 'assets/image/others/brand-1.jpg' %}" alt="">
+                </div>
+                <div class="single-slide">
+                    <img src="{% static 'assets/image/others/brand-2.jpg' %}" alt="">
+                </div>
+                <div class="single-slide">
+                    <img src="{% static 'assets/image/others/brand-3.jpg' %}" alt="">
+                </div>
+                <div class="single-slide">
+                    <img src="{% static 'assets/image/others/brand-4.jpg' %}" alt="">
+                </div>
+                <div class="single-slide">
+                    <img src="{% static 'assets/image/others/brand-5.jpg' %}" alt="">
+                </div>
+                <div class="single-slide">
+                    <img src="{% static 'assets/image/others/brand-6.jpg' %}" alt="">
+                </div>
+                <div class="single-slide">
+                    <img src="{% static 'assets/image/others/brand-1.jpg' %}" alt="">
+                </div>
+                <div class="single-slide">
+                    <img src="{% static 'assets/image/others/brand-2.jpg' %}" alt="">
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}

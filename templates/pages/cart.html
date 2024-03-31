@@ -1,0 +1,85 @@
+{% extends 'includes/header_footer.html' %}
+{% load static %}
+{% block content %}
+
+<!-- Cart Page Start -->
+<main class="cart-page-main-block inner-page-sec-padding-bottom">
+    <div class="cart_area cart-area-padding  ">
+        <div class="container">
+            <div class="page-section-title">
+                <h1>Shopping Cart</h1>
+            </div>
+            <div class="row">
+                <div class="col-12">
+                    <form action="#" class="">
+                        <!-- Cart Table -->
+                        <div class="cart-table table-responsive mb--40">
+                            <table class="table">
+                                <!-- Head Row -->
+                                <thead>
+                                    <tr>
+                                        <th class="pro-remove"></th>
+                                        <th class="pro-thumbnail">Image</th>
+                                        <th class="pro-title">Product</th>
+                                        <th class="pro-price">Price</th>
+                                        <th class="pro-quantity">Quantity</th>
+                                        <th class="pro-subtotal">Total</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <!-- Product Row -->
+                                    {% csrf_token %}
+                                    {%for data in cart_data %}
+                                    <tr>
+                                        <td class="pro-remove"><a href="#" class="remove_product_items_btn" product_item_id="{{data.id}}"><i class="far fa-trash-alt"></i></a>
+                                        </td>
+                                        <td class="pro-thumbnail"><a href="#"><img
+                                                    src="{{data.item.image.url}}" alt="Product"></a></td>
+                                        <td class="pro-title"><a href="#">{{ data.item.name }}</a></td>
+                                        <td class="pro-price"><span>${{data.item.price}}</span></td>
+                                        <td class="pro-quantity">
+                                            <div class="pro-qty">
+                                                <div class="count-input-block">
+                                                    <i class="fa fa-minus decreaseQty" cart_id="{{data.id}}"></i>
+                                                    <input type="number" class="form-control text-center number_quantity_update"
+                                                    min="1" cart_id="{{data.id}}" value="{{data.quantity}}" readonly>
+                                                    <i class="fa fa-plus increaseQty" cart_id="{{data.id}}"></i>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td class="pro-subtotal"><span class="subtotal_cart">${{data.total_price}}</span></td>
+                                    </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="cart-section-2">
+        <div class="container">
+            <div class="row">
+                <!-- Cart Summary -->
+                <div class="col-lg-6 col-12 d-flex">
+                    <div class="cart-summary">
+                        <div class="cart-summary-wrap">
+                            <h4><span>Cart Summary</span></h4>
+                            <p>Sub Total <span class="text-primary add_total_count">${{total_product_price}}</span></p>
+                            <p>Shipping Cost <span class="text-primary">$00.00</span></p>
+                            <h2>Grand Total <span class="text-primary add_total_count">${{total_product_price}}</span></h2>
+                        </div>
+                        <div class="cart-summary-button">
+                            <a href="{% url 'checkout' %}" class="checkout-btn c-btn btn--primary">Checkout</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+<!-- Cart Page End -->
+
+
+{% endblock %}
